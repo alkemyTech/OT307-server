@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.3'
+ruby '3.1.2'
 
 gem 'rails', '~> 6.1.7'
 
@@ -43,4 +43,5 @@ group :test do
   gem 'simplecov', '~> 0.21.2', require: false
 end
 
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'tzinfo-data'
+gem 'net-smtp'
