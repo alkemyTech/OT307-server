@@ -19,5 +19,8 @@ AllCops:
 Layout/LineLength:
   Max: 100
 
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
 Style/Documentation:
   Enabled: false

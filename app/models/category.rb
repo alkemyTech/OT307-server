@@ -18,6 +18,8 @@
 class Category < ApplicationRecord
   include Discard::Model
 
+  has_many :news, dependent: :destroy
   has_one_attached :image
+
   validates :name, presence: true
 end
