@@ -9,5 +9,6 @@
 #  updated_at :datetime         not null
 #
 class Testimonial < ApplicationRecord
+    include Discard::Model
     validates :name, presence: true
 end
