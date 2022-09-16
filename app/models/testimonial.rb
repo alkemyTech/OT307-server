@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: testimonials
@@ -14,7 +16,7 @@
 #  index_testimonials_on_discarded_at  (discarded_at)
 #
 class Testimonial < ApplicationRecord
-    include Discard::Model
-    has_one_attached :testimonial_image
-    validates :name, presence: true
+  include Discard::Model
+  has_one_attached :testimonial_image
+  validates :name, presence: true
 end
