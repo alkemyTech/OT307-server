@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: categories
@@ -14,5 +16,8 @@
 #  index_categories_on_discarded_at  (discarded_at)
 #
 class Category < ApplicationRecord
-    include Discard::Model
+  include Discard::Model
+
+  has_one_attached :image
+  validates :name, presence: true
 end
