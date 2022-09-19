@@ -17,6 +17,6 @@
 #
 class Testimonial < ApplicationRecord
   include Discard::Model
-  has_one_attached :testimonial_image
+  has_one_attached :image
   validates :name, presence: true
 end
