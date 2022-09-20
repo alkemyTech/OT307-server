@@ -4,16 +4,16 @@
 #
 # Table name: organizations
 #
-#  id           :bigint           not null, primary key
-#  aboutUsText  :text
-#  address      :string
-#  discarded_at :datetime
-#  email        :string           not null
-#  name         :string           not null
-#  phone        :integer
-#  welcomeText  :text             not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id            :bigint           not null, primary key
+#  about_us_text :text
+#  address       :string
+#  discarded_at  :datetime
+#  email         :string           not null
+#  name          :string           not null
+#  phone         :integer
+#  welcome_text  :text             not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 # Indexes
 #
@@ -25,7 +25,7 @@ FactoryBot.define do
     address { 'MyString' }
     phone { 1 }
     email { 'MyString' }
-    welcomeText { 'MyText' }
-    aboutUsText { 'MyText' }
+    welcome_text { 'MyText' }
+    about_us_text { 'MyText' }
   end
 end

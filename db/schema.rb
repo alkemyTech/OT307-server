@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2022_09_14_194746) do
     t.string "address"
     t.integer "phone"
     t.string "email", null: false
-    t.text "welcomeText", null: false
-    t.text "aboutUsText"
+    t.text "welcome_text", null: false
+    t.text "about_us_text"
     t.datetime "discarded_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

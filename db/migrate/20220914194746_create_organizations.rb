@@ -5,8 +5,8 @@ class CreateOrganizations < ActiveRecord::Migration[6.1]
       t.string :address
       t.integer :phone
       t.string :email, null: false
-      t.text :welcomeText, null: false
-      t.text :aboutUsText
+      t.text :welcome_text, null: false
+      t.text :about_us_text
       t.datetime :discarded_at
       t.index :discarded_at
 
