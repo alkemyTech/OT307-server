@@ -8,7 +8,7 @@ module Api
       before_action :authenticate_request, only: %i[index me update destroy]
       before_action :authorize_user, only: %i[index me destroy]
 
-      def index
-       
-      end
       
+    end 
+  end 
+end 

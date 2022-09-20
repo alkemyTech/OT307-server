@@ -33,9 +33,7 @@ class User < ApplicationRecord
   has_one_attached :image
 
   belongs_to :role
-  has_many :comments, dependent: :destroy
-  has_many :contacts, dependent: :nullify
-
+ 
   validates :first_name, :last_name, :email, :password, presence: true
   validates :email, uniqueness: true
 end
