@@ -28,12 +28,9 @@
 #
 class User < ApplicationRecord
   include Discard::Model
-
   has_secure_password
   has_one_attached :image
-
   belongs_to :role
- 
   validates :first_name, :last_name, :email, :password, presence: true
   validates :email, uniqueness: true
 end
