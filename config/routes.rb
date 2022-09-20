@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
 
-  resources :sessions, only: [:create]
+  resources :users, only: [:create]
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
