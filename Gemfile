@@ -17,6 +17,7 @@ gem 'pagy', '~> 5.10.1'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
+gem 'sendgrid-ruby', '~> 6.6', '>= 6.6.2'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
