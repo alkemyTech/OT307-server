@@ -3,7 +3,7 @@
 class UserNotifierMailer < ApplicationMailer
   default { :from => '' }
 
-  def send_email(params)
+  def send_welcome_email(params)
     @email = params[:to]
     @subject = params[:subject]
     mail(to: @email, subject: @subject)
