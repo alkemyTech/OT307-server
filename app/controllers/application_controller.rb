@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  include Authorizaton
+  include Authorization
 end

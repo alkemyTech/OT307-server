@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
-module Authorizaton
+module Authorization
   def authorization
-    return unless administrator?
-
-    render json: { error: 'Not authorized. Need Administrator role to access' },
-           status: :forbidden
+    render json: { error: 'Not authorized. Need Administrator role to access' }, status: :forbidden unless administrator?
   end
 
   def administrator?
