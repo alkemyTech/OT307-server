@@ -9,6 +9,6 @@ module Authorization
   end
 
   def administrator?
-    @user.role.name == 'administrator'
+    @current_user.role.name == 'administrator'
   end
 end
