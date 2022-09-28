@@ -7,6 +7,7 @@ ruby '3.0.3'
 
 gem 'rails', '~> 6.1.7'
 
+gem 'aws-sdk-s3', '~> 1.114'
 gem 'bcrypt', '~> 3.1', '>= 3.1.16'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'discard', '~> 1.2', '>= 1.2.1'
