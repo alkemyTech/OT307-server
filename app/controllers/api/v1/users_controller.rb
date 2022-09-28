@@ -6,7 +6,7 @@ module Api
   module V1
     class UsersController < ApplicationController
       before_action :set_user_for_login, only: :login
-      before_action :authenticate_request, only: %i[update]
+      before_action :authenticate_request, only: %i[update destroy]
       def login
         if @user.authenticate(params[:user][:password])
           token = JsonWebToken.encode(user_id: @user.id)
@@ -17,6 +17,7 @@ module Api
           render json: { error: 'unauthorized' }, status: :unauthorized
         end
       end
+      
 
       def update
         if @current_user.update(user_params)
@@ -24,6 +25,14 @@ module Api
         else
           render json: @current_user.errors, status: :unprocessable_entity
         end
+      end
+
+      def destroy
+        @user = User.kept.find(params[:id])
+        @user.discard
+        head :ok
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "Could not find member with ID '#{params[:id]}'" }
       end
 
       private
