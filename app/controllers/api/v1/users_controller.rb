@@ -6,8 +6,8 @@ module Api
   module V1
     class UsersController < ApplicationController
       before_action :set_user_for_login, only: :login
-      before_action :authenticate_request, only: %i[index me]
-      before_action :authorization, only: %i[index]
+      before_action :authenticate_request, only: %i[index me update]
+      before_action :authorization, only: %i[index update]
 
       def index
         @users = User.kept
@@ -41,6 +41,14 @@ module Api
         end
       end
 
+      def update
+        if @current_user.update(user_params)
+          render json: UserSerializer.new(@current_user).serializable_hash, status: :ok
+        else
+          render json: @current_user.errors, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def set_user_for_login
@@ -48,7 +56,7 @@ module Api
       end
 
       def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :photo, :role_id)
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :image, :role_id)
       end
 
       def render_error
