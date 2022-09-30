@@ -3,9 +3,9 @@
 module Api
   module V1
     class CategoriesController < ApplicationController
-      before_action :set_category, only: %i[show]
-      before_action :authenticate_request, only: %i[index show create]
-      before_action :authorization, only: %i[index show create]
+      before_action :set_category, only: %i[show update]
+      before_action :authenticate_request, only: %i[index show create update]
+      before_action :authorization, only: %i[index show create update]
 
       def index
         @categories = Category.kept
@@ -27,6 +27,14 @@ module Api
           end
         else
           render json: { error: 'Name must be a string' }, status: :unprocessable_entity
+        end
+      end
+
+      def update
+        if @category.update(category_params)
+          render json: CategorySerializer.new(@category).serializable_hash, status: :ok
+        else
+          render json: { errors: @category }, status: :unprocessable_entity
         end
       end
 
