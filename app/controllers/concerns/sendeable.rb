@@ -3,7 +3,7 @@
 module Sendeable
   extend ActiveSupport::Concern
 
-  def self.send_email(email, subject)
-    UserNotifierMailer.send_email({ to: email, subject: subject }).deliver
+  def self.send_welcome_email(user, subject)
+    UserNotifierMailer.send_welcome_email(user, subject).deliver
   end
 end
