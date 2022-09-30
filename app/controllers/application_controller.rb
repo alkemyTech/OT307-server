@@ -2,4 +2,6 @@
 
 class ApplicationController < ActionController::API
   include Authorization
+  include Sendeable
+  include Authenticable
 end
