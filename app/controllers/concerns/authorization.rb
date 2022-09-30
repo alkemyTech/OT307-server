@@ -2,6 +2,7 @@
 
 module Authorization
   extend ActiveSupport::Concern
+
   def authorization
     return if administrator?
 
