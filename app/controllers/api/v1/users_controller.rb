@@ -19,6 +19,7 @@ module Api
         @user.role = Role.find(params[:user][:role_id])
         if @user.save
           @token = JsonWebToken.encode(user_id: @user.id)
+          Sendeable.send_welcome_email(@user, 'Bienvenido a SOMOS MAS!')
           render_user
         else
           render_error
