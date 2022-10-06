@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       end
       resources :news, only: %i[create update show destroy]
       resources :members, only: %i[create index update]
+      resources :activities, only: [:create]
     end
   end
 end
