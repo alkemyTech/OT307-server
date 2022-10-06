@@ -6,7 +6,7 @@ module Api
   module V1
     class UsersController < ApplicationController
       before_action :set_user_for_login, only: :login
-      before_action :authenticate_request, only: %i[index]
+      before_action :authenticate_request, only: %i[index me]
       before_action :authorization, only: %i[index]
 
       def index
@@ -14,11 +14,16 @@ module Api
         render json: UserSerializer.new(@users).serializable_hash.to_json, status: :ok
       end
 
+      def me
+        render json: UserSerializer.new(@current_user).serializable_hash, status: :ok
+      end
+
       def create
         @user = User.new(user_params)
         @user.role = Role.find(params[:user][:role_id])
         if @user.save
           @token = JsonWebToken.encode(user_id: @user.id)
+          Sendeable.send_welcome_email(@user, 'Bienvenido a SOMOS MAS!')
           render_user
         else
           render_error
