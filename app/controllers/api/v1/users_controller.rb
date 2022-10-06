@@ -7,7 +7,7 @@ module Api
     class UsersController < ApplicationController
       before_action :set_user_for_login, only: :login
       before_action :authenticate_request, only: %i[index me]
-      before_action :authorization, only: %i[index me]
+      before_action :authorization, only: %i[index]
 
       def index
         @users = User.kept
