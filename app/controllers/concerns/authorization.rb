@@ -9,7 +9,18 @@ module Authorization
            status: :forbidden
   end
 
+  def owner?
+    params[:id].to_i == @current_user.id
+  end
+
   def administrator?
     @current_user.role.name == 'administrator'
+  end
+
+  def ownership?
+    return if administrator? || owner?
+
+    render json: { errors: 'Unauthorized access. Need administrator role to access' },
+           status: :forbidden
   end
 end
