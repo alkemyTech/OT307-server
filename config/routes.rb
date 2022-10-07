@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
       get "/users", to: "users#index"
       get "auth/me", to: "users#me"
-      resources :categories, only: %i[index show create]
+      resources :categories, only: %i[index show create update]
     end
   end
 end
