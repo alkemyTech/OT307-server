@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get "/users", to: "users#index"
       get "auth/me", to: "users#me"
       resources :categories, only: %i[index show create update destroy]
+      resources :members, only: %i[destroy]
     end
   end
 end
