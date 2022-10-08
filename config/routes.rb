@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :members, only: %i[destroy]
       end
       resources :news, only: %i[create update show destroy]
+      resources :members, only: %i[create]
     end
   end
 end
