@@ -3,8 +3,8 @@
 module Api
   module V1
     class MembersController < ApplicationController
-      before_action :set_member, only: %i[destroy]
-      before_action :authenticate_request, only: %i[destroy create index]
+      before_action :set_member, only: %i[destroy update]
+      before_action :authenticate_request, only: %i[destroy create index update]
       before_action :authorization, only: %i[index]
 
       def destroy
@@ -16,6 +16,18 @@ module Api
           @member = Member.new(member_params)
           if @member.save
             render json: MemberSerializer.new(@member).serializable_hash, status: :created
+          else
+            render json: @member.errors, status: :unprocessable_entity
+          end
+        else
+          render json: { error: 'Name is expected to be a string' }, status: :unprocessable_entity
+        end
+      end
+
+      def update
+        if member_params[:name].to_i.to_s == '0'
+          if @member.update(member_params)
+            render json: MemberSerializer.new(@member).serializable_hash, status: :ok
           else
             render json: @member.errors, status: :unprocessable_entity
           end
