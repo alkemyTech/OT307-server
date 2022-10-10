@@ -21,5 +21,6 @@
 #
 class OrganizationSerializer
   include JSONAPI::Serializer
-  attributes :name, :address, :email, :phone, :about_us_text, :welcome_text
+  attributes :name, :address, :email, :phone, :about_us_text, :welcome_text, :facebook_url,
+             :instagram_url, :linkedin_url
 end
