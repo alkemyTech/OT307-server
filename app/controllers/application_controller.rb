@@ -5,4 +5,5 @@ class ApplicationController < ActionController::API
   include Sendeable
   include Authenticable
   include Uploadable
+  include Pagy::Backend
 end
