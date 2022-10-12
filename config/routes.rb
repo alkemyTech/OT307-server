@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :organizations, only: %i[update] do
         get 'public', on: :member
       end
+      resources :news, only: %i[create update]
     end
   end
 end
