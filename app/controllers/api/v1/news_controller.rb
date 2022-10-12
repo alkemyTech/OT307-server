@@ -27,6 +27,11 @@ module Api
         render json: NewsSerializer.new(@news).serializable_hash, status: :ok
       end
 
+      def destroy
+        @news.discard
+        head :no_content
+      end
+
       private
 
       def set_news
