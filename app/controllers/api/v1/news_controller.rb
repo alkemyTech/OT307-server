@@ -3,9 +3,9 @@
 module Api
   module V1
     class NewsController < ApplicationController
-      before_action :set_news, only: %i[update]
-      before_action :authenticate_request, only: %i[create update]
-      before_action :authorization, only: %i[create update]
+      before_action :set_news, only: %i[update show]
+      before_action :authenticate_request, only: %i[create update show]
+      before_action :authorization, only: %i[create update show]
 
       def create
         @news = News.new(news_params)
@@ -20,6 +20,10 @@ module Api
       def update
         @news.update(news_params)
 
+        render json: NewsSerializer.new(@news).serializable_hash, status: :ok
+      end
+
+      def show
         render json: NewsSerializer.new(@news).serializable_hash, status: :ok
       end
 
