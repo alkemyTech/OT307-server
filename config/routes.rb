@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :categories, only: %i[index show create update destroy]
       resources :organizations, only: %i[update] do
         get 'public', on: :member
+      resources :members, only: %i[destroy]
       end
       resources :news, only: %i[create update show destroy]
     end
