@@ -9,7 +9,9 @@ module Api
 
       def public
         render json: OrganizationSerializer.new(@organization, fields:
-        { organization: %i[name image phone address] }).serializable_hash,
+        # rubocop:disable Layout/LineLength
+        { organization: %i[name image phone address facebook_url instagram_url linkedin_url] }).serializable_hash,
+               # rubocop:enable Layout/LineLength
                status: :ok
       end
 
