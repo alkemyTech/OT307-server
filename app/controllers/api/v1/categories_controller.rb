@@ -6,11 +6,12 @@ module Api
       before_action :set_category, only: %i[show update destroy]
       before_action :authenticate_request, only: %i[index show create update destroy]
       before_action :authorization, only: %i[index show create update destroy]
+      after_action { pagy_headers_merge(@pagy) if @pagy }
 
       def index
-        @categories = Category.kept
-        render json: CategorySerializer.new(@categories,
-                                            { fields: { category: [:name] } }).serializable_hash
+        @pagy, @categories = pagy(Category.kept)
+        render json: { categories_serializer: render_serializer,
+                       pages_information: pagy_metadata(@pagy) }
       end
 
       def show
@@ -44,6 +45,11 @@ module Api
       end
 
       private
+
+      def render_serializer
+        CategorySerializer.new(@categories,
+                               { fields: { category: [:name] } }).serializable_hash
+      end
 
       def set_category
         @category = Category.kept.find(params[:id])
