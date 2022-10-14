@@ -20,14 +20,16 @@ module Api
           render json: NewsSerializer.new(@news)
                                      .serializable_hash, status: :created
         else
-          render json: { error: @news.errors.full_message }
+          render json: @news.errors, status: :unprocessable_entity
         end
       end
 
       def update
-        @news.update(news_params)
-
-        render json: NewsSerializer.new(@news).serializable_hash, status: :ok
+        if @news.update(news_params)
+          render json: NewsSerializer.new(@news).serializable_hash, status: :ok
+        else
+          render json: @news.errors, status: :unprocessable_entity
+        end
       end
 
       def show

@@ -21,12 +21,14 @@
 #
 #  fk_rails_...  (category_id => categories.id)
 #
+require 'faker'
 FactoryBot.define do
   factory :news do
-    content { 'MyString' }
+    category_id { 1 }
     name { 'MyString' }
-    news_type { 'news' }
+    content { 'MyString' }
 
-    association :category
+    category
+    # association :category, factory: :category
   end
 end
