@@ -52,7 +52,11 @@ module Api
       private
 
       def set_user_for_login
-        @user = User.kept.find_by!(email: params[:user][:email])
+        begin
+          @user = User.kept.find_by!(email: params[:user][:email])
+        rescue ActiveRecord::RecordNotFound
+          render json: { error: 'unauthorized' }, status: :unauthorized
+        end
       end
 
       def user_params
