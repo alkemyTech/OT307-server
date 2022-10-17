@@ -4,7 +4,8 @@ module Api
   module V1
     class MembersController < ApplicationController
       before_action :set_member, only: %i[destroy]
-      before_action :authenticate_request, only: %i[destroy create]
+      before_action :authenticate_request, only: %i[destroy create index]
+      before_action :authorization, only: %i[index]
 
       def destroy
         @member.discard
@@ -21,6 +22,11 @@ module Api
         else
           render json: { error: 'Name is expected to be a string' }, status: :unprocessable_entity
         end
+      end
+
+      def index
+        @members = Member.kept
+        render json: MemberSerializer.new(@members).serializable_hash, status: :ok
       end
 
       private
