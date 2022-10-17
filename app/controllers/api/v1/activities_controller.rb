@@ -3,20 +3,36 @@
 module Api
   module V1
     class ActivitiesController < ApplicationController
-      before_action :authenticate_request, only: %i[create]
-      before_action :authorization, only: %i[create]
+      before_action :set_activity, only: %i[update]
+      before_action :authenticate_request, only: %i[create update]
+      before_action :authorization, only: %i[create update]
 
       def create
         @activity = Activity.new(activity_params)
         if @activity.save
           render json: ActivitySerializer.new(@activity).serializable_hash,
                  status: :created
+          else
+            render json: @activity.errors, status: :unprocessable_entity
+          end
+        end
+      end
+
+      def update
+        if @activity.update(activity_params)
+          render json: ActivitySerializer.new(@activity).serializable_hash, status: :ok
         else
           render json: @activity.errors, status: :unprocessable_entity
         end
       end
 
       private
+
+      def set_activity
+        @activity = Activity.kept.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "Couldn't find activity with ID #{params[:id]}" }, status: :not_found
+      end
 
       def activity_params
         params.require(:activity).permit(:name, :content, :image)
