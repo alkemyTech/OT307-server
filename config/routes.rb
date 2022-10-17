@@ -5,10 +5,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "/auth/login", to: "users#login"
       post "auth/register", to: "users#create"
-      resources :users, only: %i[index update]
-
-      get "/users", to: "users#index"
       get "auth/me", to: "users#me"
+      resources :users, only: %i[index update]
 
       resources :categories, only: %i[index show create update destroy]
       resources :organizations, only: %i[update] do

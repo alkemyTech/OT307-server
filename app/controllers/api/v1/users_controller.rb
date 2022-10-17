@@ -7,7 +7,7 @@ module Api
     class UsersController < ApplicationController
       before_action :set_user_for_login, only: :login
       before_action :authenticate_request, only: %i[index me update]
-      before_action :authorization, only: %i[index update]
+      before_action :authorization, only: %i[index]
 
       def index
         @users = User.kept
@@ -20,7 +20,7 @@ module Api
 
       def create
         @user = User.new(user_params)
-        @user.role = Role.find(params[:user][:role_id])
+        #@user.role = Role.find(params[:user][:role_id])
         if @user.save
           @token = JsonWebToken.encode(user_id: @user.id)
           Sendeable.send_welcome_email(@user, 'Bienvenido a SOMOS MAS!')
