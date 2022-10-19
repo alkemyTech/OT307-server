@@ -3,9 +3,16 @@
 module Api
   module V1
     class NewsController < ApplicationController
-      before_action :set_news, only: %i[update show]
-      before_action :authenticate_request, only: %i[create update show]
-      before_action :authorization, only: %i[create update show]
+      before_action :set_news, only: %i[update show destroy]
+      before_action :authenticate_request, only: %i[create update show destroy index]
+      before_action :authorization, only: %i[create update show destroy]
+      after_action { pagy_headers_merge(@pagy) if @pagy }
+
+      def index
+        @pagy, @news = pagy(News.kept)
+        render json: { news_serializer: render_serializer,
+                       pages_information: pagy_metadata(@pagy) }
+      end
 
       def create
         @news = News.new(news_params)
@@ -33,6 +40,11 @@ module Api
       end
 
       private
+
+      def render_serializer
+        NewsSerializer.new(@news,
+                           { fields: { news: %i[name content] } }).serializable_hash
+      end
 
       def set_news
         @news = News.kept.find(params[:id])
