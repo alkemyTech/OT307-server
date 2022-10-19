@@ -1,3 +1,8 @@
+# Documentation
+
+Categories and News documentation created with Postman. Follow the link below to see it.
+
+https://documenter.getpostman.com/view/21763381/2s847HNCLM#intro
 # base-ong-server-ruby
 Repositorio base para Caso ONG de Ruby
 
