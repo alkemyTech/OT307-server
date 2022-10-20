@@ -6,16 +6,15 @@ Rails.application.routes.draw do
       post "/auth/login", to: "users#login"
       post "auth/register", to: "users#create"
       get "auth/me", to: "users#me"
-      resources :users, only: %i[index update]
-
+      
+      resources :activities, only: %i[create update]
       resources :categories, only: %i[index show create update destroy]
+      resources :members, only: %i[create index update destroy]
+      resources :news, only: %i[create update show destroy index]
       resources :organizations, only: %i[update] do
         get 'public', on: :member
-      resources :members, only: %i[destroy]
       end
-      resources :news, only: %i[create update show destroy index]
-      resources :members, only: %i[create index update]
-      resources :activities, only: [:create]
+      resources :users, only: %i[index update]
     end
   end
 end
