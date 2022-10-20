@@ -17,7 +17,7 @@
 #
 FactoryBot.define do
   factory :category do
-    name { "Category #{rand(1..20)}" }
-    description { Faker::Lorem.paragraph(sentence_count: 2) }
+    name { 'aaaaa}' }
+    description { 'aaaaaaaaa' }
   end
 end
