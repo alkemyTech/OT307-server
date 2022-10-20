@@ -6,3 +6,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+
+
+Activity.destroy_all
+
+puts 'Creating activities...'
+
+Activity.create!([
+  { name: Faker::Hobby.activity , content: Faker::Lorem.paragraph(sentence_count: 4)  },
+  { name: Faker::Hobby.activity , content: Faker::Lorem.paragraph(sentence_count: 4)  },
+  { name: Faker::Hobby.activity , content: Faker::Lorem.paragraph(sentence_count: 4)  }
+])
+0
+puts 'Activities created:'
+
+Activity.all.each { |activity| puts "=>#{activity.name}" }
